@@ -1,6 +1,6 @@
 <p align=center><img src=https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/320/apple/155/racing-car_1f3ce.png width=120px></p>
 <h1 align=center>haproxy (Docker image)</h1>
-<p align=center>Built-from-source container image of the <a href=https://www.haproxy.net/>haproxy HTTP server</a></p>
+<p align=center>Built-from-source container image of the <a href=https://www.haproxy.org/>haproxy HTTP server</a></p>
 
 Available at [`ricardbejarano/haproxy`](https://hub.docker.com/r/ricardbejarano/haproxy).
 
