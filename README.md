@@ -92,6 +92,11 @@ Other examples:
 - `bash tests/checksec.sh haproxy /usr/local/sbin/haproxy`
 
 
+## Volumes
+
+- Bind your **configuration file** at `/etc/haproxy/haproxy.cfg`.
+
+
 ## Filesystem
 
 The images' contents are:
