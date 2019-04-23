@@ -70,8 +70,6 @@ RUN apt update && \
 
 FROM scratch
 
-COPY rootfs /
-
 COPY --from=build /lib/x86_64-linux-gnu/libc.so.6 \
                   /lib/x86_64-linux-gnu/libcrypt.so.1 \
                   /lib/x86_64-linux-gnu/libdl.so.2 \
@@ -91,6 +89,8 @@ COPY --from=build /lib64/ld-linux-x86-64.so.2 \
                   /lib64/
 COPY --from=build /tmp/haproxy/haproxy /haproxy
 
+COPY rootfs /
+
 STOPSIGNAL SIGUSR1
 
-ENTRYPOINT ["/haproxy", "-f", "/etc/haproxy/haproxy.cfg"]
+CMD ["/haproxy", "-f", "/etc/haproxy/haproxy.cfg"]

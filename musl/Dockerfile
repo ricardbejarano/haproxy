@@ -66,8 +66,6 @@ RUN cd /tmp/openssl-$OPENSSL_VERSION && \
 
 FROM scratch
 
-COPY rootfs /
-
 COPY --from=build /lib/ld-musl-x86_64.so.1 \
                   /usr/local/lib/libpcre.so.1 \
                   /usr/local/lib/libz.so.1 \
@@ -76,6 +74,8 @@ COPY --from=build /lib/ld-musl-x86_64.so.1 \
                   /lib/
 COPY --from=build /tmp/haproxy/haproxy /haproxy
 
+COPY rootfs /
+
 STOPSIGNAL SIGUSR1
 
-ENTRYPOINT ["/haproxy", "-f", "/etc/haproxy/haproxy.cfg"]
+CMD ["/haproxy", "-f", "/etc/haproxy/haproxy.cfg"]
