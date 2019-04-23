@@ -1,5 +1,5 @@
 <p align=center><img src=https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/320/apple/155/racing-car_1f3ce.png width=120px></p>
-<h1 align=center>haproxy (Docker image)</h1>
+<h1 align=center>haproxy (container image)</h1>
 <p align=center>Built-from-source container image of the <a href=https://www.haproxy.org/>haproxy HTTP server</a></p>
 
 Available at [`ricardbejarano/haproxy`](https://hub.docker.com/r/ricardbejarano/haproxy).
@@ -38,7 +38,7 @@ docker build -t haproxy:musl -f musl/Dockerfile .
 
 ## Security
 
-This image attempts to build a secure HAProxy Docker image.
+This image attempts to build a secure HAProxy container image.
 
 It does so by the following ways:
 
@@ -48,7 +48,7 @@ It does so by the following ways:
 
 ### Verifying the presence of exploit mitigations
 
-To check whether a binary in a Docker image has those mitigations enabled, use [tests/checksec.sh](https://github.com/ricardbejarano/haproxy/blob/master/tests/checksec.sh).
+To check whether a binary in a container image has those mitigations enabled, use [tests/checksec.sh](https://github.com/ricardbejarano/haproxy/blob/master/tests/checksec.sh).
 
 #### Usage
 
@@ -83,7 +83,7 @@ Full RELRO   Canary found   NX enabled   PIE enabled   No RPATH   No RUNPATH   8
 Cleaning up...Done!
 ```
 
-This wrapper script works with any binary in a Docker image. Feel free to use it with any other image.
+This wrapper script works with any binary in a container image. Feel free to use it with any other image.
 
 Other examples:
 
