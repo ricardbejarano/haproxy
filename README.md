@@ -79,7 +79,7 @@ Extracting ricardbejarano/haproxy:glibc:/haproxy...Done!
 Downloading checksec.sh...Done!
 Running checksec.sh:
 RELRO        STACK CANARY   NX           PIE           RPATH      RUNPATH      Symbols         FORTIFY   Fortified   Fortifiable   FILE
-Full RELRO   Canary found   NX enabled   PIE enabled   No RPATH   No RUNPATH   8807 Symbols    Yes       38          0             /tmp/.checksec-wfiwzQ1c
+Full RELRO   Canary found   NX enabled   PIE enabled   No RPATH   No RUNPATH   8807 Symbols    Yes       0           38            /tmp/.checksec-PdU8rBVu
 Cleaning up...Done!
 ```
 
