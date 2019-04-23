@@ -19,18 +19,18 @@ ARG HAPROXY_CONFIG="\
     -j 4 \
     TARGET=linux2628 \
     USE_PCRE=1 \
-    USE_OPENSSL=1 \
     USE_ZLIB=1 \
+    USE_OPENSSL=1 \
     USE_LUA=1 \
     LUA_INC=/tmp/lua-$LUA_VERSION/src \
     LUA_SRC=/tmp/lua-$LUA_VERSION/src \
     LUA_LIB_NAME=lua"
 
 ADD https://ftp.pcre.org/pub/pcre/pcre-$PCRE_VERSION.tar.gz /tmp/pcre.tar.gz
-ADD https://www.openssl.org/source/openssl-$OPENSSL_VERSION.tar.gz /tmp/openssl.tar.gz
 ADD https://zlib.net/zlib-$ZLIB_VERSION.tar.gz /tmp/zlib.tar.gz
+ADD https://www.openssl.org/source/openssl-$OPENSSL_VERSION.tar.gz /tmp/openssl.tar.gz
 ADD https://www.lua.org/ftp/lua-$LUA_VERSION.tar.gz /tmp/lua.tar.gz
-ADD http://www.haproxy.org/download/$HAPROXY_VERSION_SHORT/src/haproxy-$HAPROXY_VERSION.tar.gz /tmp/haproxy.tar.gz
+ADD https://www.haproxy.org/download/$HAPROXY_VERSION_SHORT/src/haproxy-$HAPROXY_VERSION.tar.gz /tmp/haproxy.tar.gz
 
 RUN cd /tmp && \
     if [ "$PCRE_CHECKSUM" != "$(sha256sum /tmp/pcre.tar.gz | awk '{print $1}')" ]; then exit 1; fi && \
@@ -45,17 +45,17 @@ RUN cd /tmp && \
     tar xf /tmp/haproxy.tar.gz && \
     mv /tmp/haproxy-$HAPROXY_VERSION /tmp/haproxy
 
-RUN apk add gcc g++ perl make readline-dev linux-headers
-RUN cd /tmp/openssl-$OPENSSL_VERSION && \
-      ./config && \
-      make && \
-      make install && \
+RUN apk add gcc g++ perl make readline-dev linux-headers && \
     cd /tmp/pcre-$PCRE_VERSION && \
       ./configure && \
       make && \
       make install && \
     cd /tmp/zlib-$ZLIB_VERSION && \
       ./configure && \
+      make && \
+      make install && \
+    cd /tmp/openssl-$OPENSSL_VERSION && \
+      ./config && \
       make && \
       make install && \
     cd /tmp/lua-$LUA_VERSION && \
