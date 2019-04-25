@@ -18,7 +18,7 @@ ARG HAPROXY_CHECKSUM="5e59466728cc3ec0bcdd0271d8a8c5bd07d99a3a9cfa0989583da0ddde
 ARG HAPROXY_CONFIG="\
     -j 4 \
     TARGET=linux2628 \
-    USE_PCRE=1 \
+    USE_STATIC_PCRE=1 \
     USE_ZLIB=1 \
     USE_OPENSSL=1 \
     USE_LUA=1 \
@@ -47,19 +47,19 @@ RUN cd /tmp && \
 
 RUN apk add gcc g++ perl make readline-dev linux-headers && \
     cd /tmp/pcre-$PCRE_VERSION && \
-      ./configure && \
+      ./configure --disable-shared && \
       make && \
       make install && \
     cd /tmp/zlib-$ZLIB_VERSION && \
-      ./configure && \
+      ./configure --static && \
       make && \
       make install && \
     cd /tmp/openssl-$OPENSSL_VERSION && \
-      ./config && \
+      ./config no-shared && \
       make && \
       make install && \
     cd /tmp/lua-$LUA_VERSION && \
-      make linux install && \
+      make linux install \
     cd /tmp/haproxy && \
       make $HAPROXY_CONFIG
 
@@ -67,10 +67,6 @@ RUN apk add gcc g++ perl make readline-dev linux-headers && \
 FROM scratch
 
 COPY --from=build /lib/ld-musl-x86_64.so.1 \
-                  /usr/local/lib/libpcre.so.1 \
-                  /usr/local/lib/libz.so.1 \
-                  /usr/local/lib/libssl.so.1.1 \
-                  /usr/local/lib/libcrypto.so.1.1 \
                   /lib/
 COPY --from=build /tmp/haproxy/haproxy /haproxy
 
