@@ -7,9 +7,9 @@ Available at [`ricardbejarano/haproxy`](https://hub.docker.com/r/ricardbejarano/
 
 ## Tags
 
-[`1.9.6-glibc`, `1.9.6`, `glibc`, `latest` *(glibc/Dockerfile)*](https://github.com/ricardbejarano/haproxy/blob/master/glibc/Dockerfile)
+[`1.9.7-glibc`, `1.9.7`, `glibc`, `latest` *(glibc/Dockerfile)*](https://github.com/ricardbejarano/haproxy/blob/master/glibc/Dockerfile)
 
-[`1.9.6-musl`, `musl` *(musl/Dockerfile)*](https://github.com/ricardbejarano/haproxy/blob/master/musl/Dockerfile)
+[`1.9.7-musl`, `musl` *(musl/Dockerfile)*](https://github.com/ricardbejarano/haproxy/blob/master/musl/Dockerfile)
 
 
 ## Features
