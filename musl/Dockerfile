@@ -59,7 +59,7 @@ RUN apk add gcc g++ perl make readline-dev linux-headers && \
       make && \
       make install && \
     cd /tmp/lua-$LUA_VERSION && \
-      make linux install \
+      make linux install && \
     cd /tmp/haproxy && \
       make $HAPROXY_CONFIG
 
