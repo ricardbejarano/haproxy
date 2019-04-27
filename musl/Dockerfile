@@ -74,4 +74,5 @@ COPY rootfs /
 
 STOPSIGNAL SIGUSR1
 
-CMD ["/haproxy", "-f", "/etc/haproxy/haproxy.cfg"]
+ENTRYPOINT ["/haproxy"]
+CMD ["-f", "/etc/haproxy/haproxy.cfg"]
