@@ -14,7 +14,7 @@ Available at [`ricardbejarano/haproxy`](https://hub.docker.com/r/ricardbejarano/
 
 ## Features
 
-* Super tiny (`glibc`-based is `~11.6MB` and `musl`-based is `~19.2MB`)
+* Super tiny (`glibc`-based is `~11.6MB` and `musl`-based is `~18.6MB`)
 * Built from source, including libraries
 * Built `FROM scratch`, see the [Filesystem](#Filesystem) section below for an exhaustive list of the image's contents
 * Reduced attack surface (no `bash`, no UNIX tools, no package manager...)
@@ -135,7 +135,7 @@ Based on the [glibc](https://www.gnu.org/software/libc/) implementation of `libc
 
 ### `musl`
 
-Based on the [musl](https://www.musl-libc.org/) implementation of `libc`. Dynamically linked.
+Based on the [musl](https://www.musl-libc.org/) implementation of `libc`. Statically linked (with the exception of `ld-musl-x86_64.so.1`).
 
 ```
 /
@@ -146,11 +146,7 @@ Based on the [musl](https://www.musl-libc.org/) implementation of `libc`. Dynami
 │   └── passwd
 ├── haproxy
 └── lib/
-    ├── ld-musl-x86_64.so.1
-    ├── libcrypto.so.1.1
-    ├── libpcre.so.1
-    ├── libssl.so.1.1
-    └── libz.so.1
+    └── ld-musl-x86_64.so.1
 ```
 
 
