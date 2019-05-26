@@ -91,7 +91,9 @@ COPY --from=build /tmp/haproxy/haproxy /haproxy
 
 COPY rootfs /
 
+USER haproxy:haproxy
+WORKDIR /
+EXPOSE 80/tcp
 STOPSIGNAL SIGUSR1
-
 ENTRYPOINT ["/haproxy"]
 CMD ["-f", "/etc/haproxy/haproxy.cfg"]
