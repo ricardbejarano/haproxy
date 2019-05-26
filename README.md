@@ -24,9 +24,9 @@ Available on [Quay](https://quay.io) as:
 
 * Super tiny (`glibc`-based is `~11.6MB` and `musl`-based is `~18.6MB`)
 * Built from source, including libraries
-* Built `FROM scratch`, see the [Filesystem](#Filesystem) section below for an exhaustive list of the image's contents
+* Built `FROM scratch`, see the [Filesystem](#filesystem) section below for an exhaustive list of the image's contents
 * Reduced attack surface (no `bash`, no UNIX tools, no package manager...)
-* Built with exploit mitigations enabled (see [Security](#Security))
+* Built with exploit mitigations enabled (see [Security](#security))
 
 
 ## Configuration
@@ -58,7 +58,7 @@ This image attempts to build a secure HAProxy container image.
 It does so by the following ways:
 
 - downloading and verifying the source code of HAProxy and every library it is built with,
-- packaging the image with only those files required during runtime (see [Filesystem](#Filesystem)),
+- packaging the image with only those files required during runtime (see [Filesystem](#filesystem)),
 - by enforcing a series of exploit mitigations (PIE, full RELRO, full SSP, NX and Fortify)
 
 ### Verifying the presence of exploit mitigations
@@ -93,8 +93,8 @@ Downloading ricardbejarano/haproxy:glibc...Done!
 Extracting ricardbejarano/haproxy:glibc:/haproxy...Done!
 Downloading checksec.sh...Done!
 Running checksec.sh:
-RELRO        STACK CANARY   NX           PIE           RPATH      RUNPATH      Symbols         FORTIFY   Fortified   Fortifiable   FILE
-Full RELRO   Canary found   NX enabled   PIE enabled   No RPATH   No RUNPATH   8807 Symbols    Yes       0           38            /tmp/.checksec-PdU8rBVu
+RELRO        STACK CANARY   NX           PIE           RPATH      RUNPATH      Symbols        FORTIFY   Fortified   Fortifiable   FILE
+Full RELRO   Canary found   NX enabled   PIE enabled   No RPATH   No RUNPATH   8807 Symbols   Yes       0           38            /tmp/.checksec-PdU8rBVu
 Cleaning up...Done!
 ```
 
