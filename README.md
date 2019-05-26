@@ -22,7 +22,7 @@ Available on [Quay](https://quay.io) as:
 
 ## Features
 
-* Super tiny (`glibc`-based is `~11.6MB` and `musl`-based is `~18.6MB`)
+* Super tiny (`glibc`-based is `~11.6MB` and `musl`-based is `~18.7MB`)
 * Built from source, including libraries
 * Built `FROM scratch`, see the [Filesystem](#filesystem) section below for an exhaustive list of the image's contents
 * Reduced attack surface (no `bash`, no UNIX tools, no package manager...)
