@@ -66,9 +66,8 @@ RUN apk add gcc g++ perl make readline-dev linux-headers && \
 
 FROM scratch
 
-COPY --from=build /lib/ld-musl-x86_64.so.1 \
-                  /lib/
-COPY --from=build /tmp/haproxy/haproxy /haproxy
+COPY --from=build /lib/ld-musl-x86_64.so.1 /lib/
+COPY --from=build /tmp/haproxy/haproxy /
 
 COPY rootfs /
 

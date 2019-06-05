@@ -85,9 +85,8 @@ COPY --from=build /lib/x86_64-linux-gnu/libc.so.6 \
                   /usr/local/lib/libssl.so.1.1 \
                   /usr/local/lib/libcrypto.so.1.1 \
                   /lib/x86_64-linux-gnu/
-COPY --from=build /lib64/ld-linux-x86-64.so.2 \
-                  /lib64/
-COPY --from=build /tmp/haproxy/haproxy /haproxy
+COPY --from=build /lib64/ld-linux-x86-64.so.2 /lib64/
+COPY --from=build /tmp/haproxy/haproxy /
 
 COPY rootfs /
 
