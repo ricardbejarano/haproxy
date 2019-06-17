@@ -22,11 +22,12 @@ Available on [Quay](https://quay.io) as:
 
 ## Features
 
-* Super tiny (`glibc`-based is `~11.6MB` and `musl`-based is `~18.7MB`)
+* Super tiny (`glibc`-based is `~11.8MB` and `musl`-based is `~19.9MB`)
 * Built from source, including libraries
 * Built `FROM scratch`, see the [Filesystem](#filesystem) section below for an exhaustive list of the image's contents
 * Reduced attack surface (no `bash`, no UNIX tools, no package manager...)
 * Built with exploit mitigations enabled (see [Security](#security))
+* Includes [official Prometheus exporter module](https://www.haproxy.com/blog/haproxy-exposes-a-prometheus-metrics-endpoint/)
 
 
 ## Configuration

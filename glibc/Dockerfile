@@ -24,7 +24,8 @@ ARG HAPROXY_CONFIG="\
     USE_LUA=1 \
     LUA_INC=/tmp/lua-$LUA_VERSION/src \
     LUA_SRC=/tmp/lua-$LUA_VERSION/src \
-    LUA_LIB_NAME=lua"
+    LUA_LIB_NAME=lua \
+    EXTRA_OBJS=contrib/prometheus-exporter/service-prometheus.o"
 
 ADD https://ftp.pcre.org/pub/pcre/pcre-$PCRE_VERSION.tar.gz /tmp/pcre.tar.gz
 ADD https://zlib.net/zlib-$ZLIB_VERSION.tar.gz /tmp/zlib.tar.gz
