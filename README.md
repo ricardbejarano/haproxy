@@ -9,15 +9,15 @@
 
 Available on [Docker Hub](https://hub.docker.com) as [`ricardbejarano/haproxy`](https://hub.docker.com/r/ricardbejarano/haproxy):
 
-- [`1.9.8-glibc`, `1.9.8`, `glibc`, `master`, `latest` *(glibc/Dockerfile)*](https://github.com/ricardbejarano/haproxy/blob/master/glibc/Dockerfile)
-- [`1.9.8-musl`, `musl` *(musl/Dockerfile)*](https://github.com/ricardbejarano/haproxy/blob/master/musl/Dockerfile)
+- [`2.0.0-glibc`, `2.0.0`, `glibc`, `master`, `latest` *(glibc/Dockerfile)*](https://github.com/ricardbejarano/haproxy/blob/master/glibc/Dockerfile)
+- [`2.0.0-musl`, `musl` *(musl/Dockerfile)*](https://github.com/ricardbejarano/haproxy/blob/master/musl/Dockerfile)
 
 ### Quay
 
 Available on [Quay](https://quay.io) as:
 
-- [`quay.io/ricardbejarano/haproxy-glibc`](https://quay.io/repository/ricardbejarano/haproxy-glibc), tags: [`1.9.8`, `master`, `latest` *(glibc/Dockerfile)*](https://github.com/ricardbejarano/haproxy/blob/master/glibc/Dockerfile)
-- [`quay.io/ricardbejarano/haproxy-musl`](https://quay.io/repository/ricardbejarano/haproxy-musl), tags: [`1.9.8`, `master`, `latest` *(musl/Dockerfile)*](https://github.com/ricardbejarano/haproxy/blob/master/musl/Dockerfile)
+- [`quay.io/ricardbejarano/haproxy-glibc`](https://quay.io/repository/ricardbejarano/haproxy-glibc), tags: [`2.0.0`, `master`, `latest` *(glibc/Dockerfile)*](https://github.com/ricardbejarano/haproxy/blob/master/glibc/Dockerfile)
+- [`quay.io/ricardbejarano/haproxy-musl`](https://quay.io/repository/ricardbejarano/haproxy-musl), tags: [`2.0.0`, `master`, `latest` *(musl/Dockerfile)*](https://github.com/ricardbejarano/haproxy/blob/master/musl/Dockerfile)
 
 
 ## Features
