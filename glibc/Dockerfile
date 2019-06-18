@@ -90,7 +90,6 @@ COPY --from=build /tmp/haproxy/haproxy /
 
 COPY rootfs /
 
-WORKDIR /
 EXPOSE 80/tcp
 STOPSIGNAL SIGUSR1
 ENTRYPOINT ["/haproxy"]
