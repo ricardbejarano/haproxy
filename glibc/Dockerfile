@@ -33,17 +33,16 @@ ADD https://www.openssl.org/source/openssl-$OPENSSL_VERSION.tar.gz /tmp/openssl.
 ADD https://www.lua.org/ftp/lua-$LUA_VERSION.tar.gz /tmp/lua.tar.gz
 ADD https://www.haproxy.org/download/$HAPROXY_VERSION_SHORT/src/haproxy-$HAPROXY_VERSION.tar.gz /tmp/haproxy.tar.gz
 
-RUN cd /tmp && \
-    if [ "$PCRE_CHECKSUM" != "$(sha256sum /tmp/pcre.tar.gz | awk '{print $1}')" ]; then exit 1; fi && \
-    tar xf /tmp/pcre.tar.gz && \
+RUN if [ "$PCRE_CHECKSUM" != "$(sha256sum /tmp/pcre.tar.gz | awk '{print $1}')" ]; then exit 1; fi && \
+    tar -C /tmp -xf /tmp/pcre.tar.gz && \
     if [ "$ZLIB_CHECKSUM" != "$(sha256sum /tmp/zlib.tar.gz | awk '{print $1}')" ]; then exit 1; fi && \
-    tar xf /tmp/zlib.tar.gz && \
+    tar -C /tmp -xf /tmp/zlib.tar.gz && \
     if [ "$OPENSSL_CHECKSUM" != "$(sha256sum /tmp/openssl.tar.gz | awk '{print $1}')" ]; then exit 1; fi && \
-    tar xf /tmp/openssl.tar.gz && \
+    tar -C /tmp -xf /tmp/openssl.tar.gz && \
     if [ "$LUA_CHECKSUM" != "$(sha256sum /tmp/lua.tar.gz | awk '{print $1}')" ]; then exit 1; fi && \
-    tar xf /tmp/lua.tar.gz && \
+    tar -C /tmp -xf /tmp/lua.tar.gz && \
     if [ "$HAPROXY_CHECKSUM" != "$(sha256sum /tmp/haproxy.tar.gz | awk '{print $1}')" ]; then exit 1; fi && \
-    tar xf /tmp/haproxy.tar.gz && \
+    tar -C /tmp -xf /tmp/haproxy.tar.gz && \
     mv /tmp/haproxy-$HAPROXY_VERSION /tmp/haproxy
 
 RUN apt update && \
