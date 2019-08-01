@@ -65,32 +65,35 @@ RUN apt update && \
       make \
         CFLAGS="-fstack-protector-all" \
         LDFLAGS="-z relro -z now" \
-        $HAPROXY_CONFIG
+        $HAPROXY_CONFIG && \
+    echo "nogroup:*:100:nobody" > /tmp/group && \
+    echo "nobody:*:100:100:::" > /tmp/passwd
 
 
 FROM scratch
 
-COPY --from=build /lib/x86_64-linux-gnu/libc.so.6 \
-                  /lib/x86_64-linux-gnu/libcrypt.so.1 \
-                  /lib/x86_64-linux-gnu/libdl.so.2 \
-                  /lib/x86_64-linux-gnu/libm.so.6 \
-                  /lib/x86_64-linux-gnu/libnss_files.so.2 \
-                  /lib/x86_64-linux-gnu/libnss_dns.so.2 \
-                  /lib/x86_64-linux-gnu/libpthread.so.0 \
-                  /lib/x86_64-linux-gnu/libresolv.so.2 \
-                  /lib/x86_64-linux-gnu/librt.so.1 \
-                  /usr/local/lib/libpcre.so.1 \
-                  /usr/local/lib/libpcreposix.so.0 \
-                  /usr/local/lib/libz.so.1 \
-                  /usr/local/lib/libssl.so.1.1 \
-                  /usr/local/lib/libcrypto.so.1.1 \
-                  /lib/x86_64-linux-gnu/
-COPY --from=build /lib64/ld-linux-x86-64.so.2 /lib64/
-COPY --from=build /tmp/haproxy/haproxy /
+COPY --from=build --chown=100:100 /tmp/haproxy/haproxy /
+COPY --from=build --chown=100:100 /lib/x86_64-linux-gnu/libc.so.6 \
+                                  /lib/x86_64-linux-gnu/libcrypt.so.1 \
+                                  /lib/x86_64-linux-gnu/libdl.so.2 \
+                                  /lib/x86_64-linux-gnu/libm.so.6 \
+                                  /lib/x86_64-linux-gnu/libnss_files.so.2 \
+                                  /lib/x86_64-linux-gnu/libnss_dns.so.2 \
+                                  /lib/x86_64-linux-gnu/libpthread.so.0 \
+                                  /lib/x86_64-linux-gnu/libresolv.so.2 \
+                                  /lib/x86_64-linux-gnu/librt.so.1 \
+                                  /usr/local/lib/libpcre.so.1 \
+                                  /usr/local/lib/libpcreposix.so.0 \
+                                  /usr/local/lib/libz.so.1 \
+                                  /usr/local/lib/libssl.so.1.1 \
+                                  /usr/local/lib/libcrypto.so.1.1 \
+                                  /lib/x86_64-linux-gnu/
+COPY --from=build --chown=100:100 /lib64/ld-linux-x86-64.so.2 /lib64/
+COPY --from=build --chown=100:100 /tmp/group \
+                                  /tmp/passwd \
+                                  /etc/
 
-COPY rootfs /
-
-EXPOSE 80/tcp
+USER 100:100
 STOPSIGNAL SIGUSR1
 ENTRYPOINT ["/haproxy"]
-CMD ["-f", "/etc/haproxy/haproxy.cfg"]
+CMD ["-f", "/haproxy.cfg"]

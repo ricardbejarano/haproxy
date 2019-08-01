@@ -61,17 +61,20 @@ RUN apk add gcc g++ perl make readline-dev linux-headers && \
     cd /tmp/lua-$LUA_VERSION && \
       make linux install && \
     cd /tmp/haproxy && \
-      make $HAPROXY_CONFIG
+      make $HAPROXY_CONFIG && \
+    echo "nogroup:*:100:nobody" > /tmp/group && \
+    echo "nobody:*:100:100:::" > /tmp/passwd
 
 
 FROM scratch
 
-COPY --from=build /lib/ld-musl-x86_64.so.1 /lib/
-COPY --from=build /tmp/haproxy/haproxy /
+COPY --from=build --chown=100:100 /tmp/haproxy/haproxy /
+COPY --from=build --chown=100:100 /lib/ld-musl-x86_64.so.1 /lib/
+COPY --from=build --chown=100:100 /tmp/group \
+                                  /tmp/passwd \
+                                  /etc/
 
-COPY rootfs /
-
-EXPOSE 80/tcp
+USER 100:100
 STOPSIGNAL SIGUSR1
 ENTRYPOINT ["/haproxy"]
-CMD ["-f", "/etc/haproxy/haproxy.cfg"]
+CMD ["-f", "/haproxy.cfg"]

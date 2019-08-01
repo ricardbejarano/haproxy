@@ -1,6 +1,6 @@
-<p align=center><img src=https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/320/apple/155/racing-car_1f3ce.png width=120px></p>
-<h1 align=center>haproxy (container image)</h1>
-<p align=center>Built-from-source container image of the <a href=https://www.haproxy.org/>haproxy HTTP server</a></p>
+<p align="center"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/320/apple/155/racing-car_1f3ce.png" width="120px"></p>
+<h1 align="center">haproxy (container image)</h1>
+<p align="center">Built-from-source container image of the <a href="https://www.haproxy.org/">HAProxy proxy and load balancer</a></p>
 
 
 ## Tags
@@ -22,19 +22,18 @@ Available on [Quay](https://quay.io) as:
 
 ## Features
 
-* Super tiny (`glibc`-based is `~11.8MB` and `musl`-based is `~19.9MB`)
-* Compiled from source during build time
-* Built `FROM scratch`, see [Filesystem](#filesystem) for an exhaustive list of the image's contents
+* Super tiny (`glibc`-based image is about `12.5MB`, `musl`-based image is about `19.9MB`)
+* Compiled from source (with binary exploit mitigations) during build time
+* Built `FROM scratch`, with zero bloat (see [Filesystem](#filesystem))
 * Reduced attack surface (no shell, no UNIX tools, no package manager...)
-* Built with binary exploit mitigations enabled
-* Includes [official Prometheus exporter module](https://www.haproxy.com/blog/haproxy-exposes-a-prometheus-metrics-endpoint/)
+* Runs as unprivileged (non-`root`) user
 
 
 ## Configuration
 
 ### Volumes
 
-- Bind your **configuration** at `/etc/haproxy/haproxy.cfg`.
+- Mount your **configuration** at `/haproxy.cfg`.
 
 
 ## Building
@@ -45,8 +44,6 @@ Available on [Quay](https://quay.io) as:
 
 ## Filesystem
 
-The images' contents are:
-
 ### `glibc`
 
 Based on the [glibc](https://www.gnu.org/software/libc/) implementation of `libc`. Dynamically linked.
@@ -55,8 +52,6 @@ Based on the [glibc](https://www.gnu.org/software/libc/) implementation of `libc
 /
 ├── etc/
 │   ├── group
-│   ├── haproxy/
-│   │   └── haproxy.cfg
 │   └── passwd
 ├── haproxy
 ├── lib/
@@ -81,14 +76,12 @@ Based on the [glibc](https://www.gnu.org/software/libc/) implementation of `libc
 
 ### `musl`
 
-Based on the [musl](https://www.musl-libc.org/) implementation of `libc`. Statically linked (with the exception of `ld-musl-x86_64.so.1`).
+Based on the [musl](https://www.musl-libc.org/) implementation of `libc`. Dynamically linked.
 
 ```
 /
 ├── etc/
 │   ├── group
-│   ├── haproxy/
-│   │   └── haproxy.cfg
 │   └── passwd
 ├── haproxy
 └── lib/
