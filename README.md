@@ -9,20 +9,20 @@
 
 Available on [Docker Hub](https://hub.docker.com) as [`ricardbejarano/haproxy`](https://hub.docker.com/r/ricardbejarano/haproxy):
 
-- [`2.0.10-glibc`, `2.0.10`, `glibc`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/haproxy/blob/master/Dockerfile.glibc)
-- [`2.0.10-musl`, `musl` *(Dockerfile.musl)*](https://github.com/ricardbejarano/haproxy/blob/master/Dockerfile.musl)
+- [`2.0.10-glibc`, `2.0.10`, `glibc`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/haproxy/blob/master/Dockerfile.glibc) (about `12.5MB`)
+- [`2.0.10-musl`, `musl` *(Dockerfile.musl)*](https://github.com/ricardbejarano/haproxy/blob/master/Dockerfile.musl) (about `19.9MB`)
 
 ### Quay
 
 Available on [Quay](https://quay.io) as:
 
-- [`quay.io/ricardbejarano/haproxy-glibc`](https://quay.io/repository/ricardbejarano/haproxy-glibc), tags: [`2.0.10`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/haproxy/blob/master/Dockerfile.glibc)
-- [`quay.io/ricardbejarano/haproxy-musl`](https://quay.io/repository/ricardbejarano/haproxy-musl), tags: [`2.0.10`, `master`, `latest` *(Dockerfile.musl)*](https://github.com/ricardbejarano/haproxy/blob/master/Dockerfile.musl)
+- [`quay.io/ricardbejarano/haproxy-glibc`](https://quay.io/repository/ricardbejarano/haproxy-glibc), tags: [`2.0.10`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/haproxy/blob/master/Dockerfile.glibc) (about `12.5MB`)
+- [`quay.io/ricardbejarano/haproxy-musl`](https://quay.io/repository/ricardbejarano/haproxy-musl), tags: [`2.0.10`, `master`, `latest` *(Dockerfile.musl)*](https://github.com/ricardbejarano/haproxy/blob/master/Dockerfile.musl) (about `19.9MB`)
 
 
 ## Features
 
-* Super tiny (`glibc`-based image is about `12.5MB`, `musl`-based image is about `19.9MB`)
+* Super tiny (see [Tags](#tags))
 * Compiled from source (with binary exploit mitigations) during build time
 * Built `FROM scratch`, with zero bloat (see [Filesystem](#filesystem))
 * Reduced attack surface (no shell, no UNIX tools, no package manager...)
