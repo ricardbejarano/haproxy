@@ -16,7 +16,7 @@ Available on [Docker Hub](https://hub.docker.com) as [`ricardbejarano/haproxy`](
 
 Available on [Quay](https://quay.io) as:
 
-- [`quay.io/ricardbejarano/haproxy-glibc`](https://quay.io/repository/ricardbejarano/haproxy-glibc), tags: [`2.1.3`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/haproxy/blob/master/Dockerfile.glibc) (about `12.5MB`)
+- [`quay.io/ricardbejarano/haproxy`](https://quay.io/repository/ricardbejarano/haproxy), [`quay.io/ricardbejarano/haproxy-glibc`](https://quay.io/repository/ricardbejarano/haproxy-glibc), tags: [`2.1.3`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/haproxy/blob/master/Dockerfile.glibc) (about `12.5MB`)
 - [`quay.io/ricardbejarano/haproxy-musl`](https://quay.io/repository/ricardbejarano/haproxy-musl), tags: [`2.1.3`, `master`, `latest` *(Dockerfile.musl)*](https://github.com/ricardbejarano/haproxy/blob/master/Dockerfile.musl) (about `19.9MB`)
 
 
