@@ -52,7 +52,10 @@ Based on the [glibc](https://www.gnu.org/software/libc/) implementation of `libc
 /
 ├── etc/
 │   ├── group
-│   └── passwd
+│   ├── passwd
+│   └── ssl/
+│       └── certs/
+│           └── ca-certificates.crt
 ├── haproxy
 ├── lib/
 │   └── x86_64-linux-gnu/
@@ -82,7 +85,10 @@ Based on the [musl](https://www.musl-libc.org/) implementation of `libc`. Dynami
 /
 ├── etc/
 │   ├── group
-│   └── passwd
+│   ├── passwd
+│   └── ssl/
+│       └── certs/
+│           └── ca-certificates.crt
 ├── haproxy
 └── lib/
     └── ld-musl-x86_64.so.1

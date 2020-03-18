@@ -43,10 +43,8 @@ RUN [ "$PCRE_CHECKSUM" = "$(sha256sum /tmp/pcre.tar.gz | awk '{print $1}')" ] &&
     tar -C /tmp -xf /tmp/openssl.tar.gz && \
     tar -C /tmp -xf /tmp/lua.tar.gz && \
     tar -C /tmp -xf /tmp/haproxy.tar.gz && \
-    mv /tmp/haproxy-$VERSION /tmp/haproxy
-
-RUN apt update && \
-    apt install -y gcc g++ perl make libreadline-dev && \
+    apt update && \
+    apt install -y gcc g++ perl make libreadline-dev ca-certificates && \
     cd /tmp/pcre-$PCRE_VERSION && \
       ./configure && \
       make && \
@@ -61,37 +59,39 @@ RUN apt update && \
       make install && \
     cd /tmp/lua-$LUA_VERSION && \
       make linux install && \
-    cd /tmp/haproxy && \
+    cd /tmp/haproxy-$VERSION && \
       make \
         CFLAGS="-fstack-protector-all" \
         LDFLAGS="-z relro -z now" \
-        $CONFIG && \
-    echo "nogroup:*:100:nobody" > /tmp/group && \
-    echo "nobody:*:100:100:::" > /tmp/passwd
+        $CONFIG
+
+RUN mkdir -p /rootfs/etc/ssl/certs /rootfs/lib/x86_64-linux-gnu /rootfs/lib64 && \
+    cp /tmp/haproxy-$VERSION/haproxy /rootfs/ && \
+    cp \
+      /lib/x86_64-linux-gnu/libc.so.6 \
+      /lib/x86_64-linux-gnu/libcrypt.so.1 \
+      /lib/x86_64-linux-gnu/libdl.so.2 \
+      /lib/x86_64-linux-gnu/libm.so.6 \
+      /lib/x86_64-linux-gnu/libnss_files.so.2 \
+      /lib/x86_64-linux-gnu/libnss_dns.so.2 \
+      /lib/x86_64-linux-gnu/libpthread.so.0 \
+      /lib/x86_64-linux-gnu/libresolv.so.2 \
+      /lib/x86_64-linux-gnu/librt.so.1 \
+      /usr/local/lib/libpcre.so.1 \
+      /usr/local/lib/libpcreposix.so.0 \
+      /usr/local/lib/libz.so.1 \
+      /usr/local/lib/libssl.so.1.1 \
+      /usr/local/lib/libcrypto.so.1.1 \
+      /rootfs/lib/x86_64-linux-gnu/ && \
+    cp /lib64/ld-linux-x86-64.so.2 /rootfs/lib64/ && \
+    echo "nogroup:*:100:nobody" > /rootfs/etc/group && \
+    echo "nobody:*:100:100:::" > /rootfs/etc/passwd && \
+    cp /etc/ssl/certs/ca-certificates.crt /rootfs/etc/ssl/certs/
 
 
 FROM scratch
 
-COPY --from=build --chown=100:100 /tmp/haproxy/haproxy /
-COPY --from=build --chown=100:100 /lib/x86_64-linux-gnu/libc.so.6 \
-                                  /lib/x86_64-linux-gnu/libcrypt.so.1 \
-                                  /lib/x86_64-linux-gnu/libdl.so.2 \
-                                  /lib/x86_64-linux-gnu/libm.so.6 \
-                                  /lib/x86_64-linux-gnu/libnss_files.so.2 \
-                                  /lib/x86_64-linux-gnu/libnss_dns.so.2 \
-                                  /lib/x86_64-linux-gnu/libpthread.so.0 \
-                                  /lib/x86_64-linux-gnu/libresolv.so.2 \
-                                  /lib/x86_64-linux-gnu/librt.so.1 \
-                                  /usr/local/lib/libpcre.so.1 \
-                                  /usr/local/lib/libpcreposix.so.0 \
-                                  /usr/local/lib/libz.so.1 \
-                                  /usr/local/lib/libssl.so.1.1 \
-                                  /usr/local/lib/libcrypto.so.1.1 \
-                                  /lib/x86_64-linux-gnu/
-COPY --from=build --chown=100:100 /lib64/ld-linux-x86-64.so.2 /lib64/
-COPY --from=build --chown=100:100 /tmp/group \
-                                  /tmp/passwd \
-                                  /etc/
+COPY --from=build --chown=100:100 /rootfs /
 
 USER 100:100
 STOPSIGNAL SIGUSR1

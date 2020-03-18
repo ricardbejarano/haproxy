@@ -43,9 +43,7 @@ RUN [ "$PCRE_CHECKSUM" = "$(sha256sum /tmp/pcre.tar.gz | awk '{print $1}')" ] &&
     tar -C /tmp -xf /tmp/openssl.tar.gz && \
     tar -C /tmp -xf /tmp/lua.tar.gz && \
     tar -C /tmp -xf /tmp/haproxy.tar.gz && \
-    mv /tmp/haproxy-$VERSION /tmp/haproxy
-
-RUN apk add gcc g++ perl make readline-dev linux-headers && \
+    apk add gcc g++ perl make readline-dev linux-headers ca-certificates && \
     cd /tmp/pcre-$PCRE_VERSION && \
       ./configure --disable-shared && \
       make && \
@@ -60,19 +58,20 @@ RUN apk add gcc g++ perl make readline-dev linux-headers && \
       make install && \
     cd /tmp/lua-$LUA_VERSION && \
       make linux install && \
-    cd /tmp/haproxy && \
-      make $CONFIG && \
-    echo "nogroup:*:100:nobody" > /tmp/group && \
-    echo "nobody:*:100:100:::" > /tmp/passwd
+    cd /tmp/haproxy-$VERSION && \
+      make $CONFIG
+
+RUN mkdir -p /rootfs/etc/ssl/certs /rootfs/lib && \
+    cp /tmp/haproxy-$VERSION/haproxy /rootfs/ && \
+    cp /lib/ld-musl-x86_64.so.1 /rootfs/lib/ && \
+    echo "nogroup:*:100:nobody" > /rootfs/etc/group && \
+    echo "nobody:*:100:100:::" > /rootfs/etc/passwd && \
+    cp /etc/ssl/certs/ca-certificates.crt /rootfs/etc/ssl/certs/
 
 
 FROM scratch
 
-COPY --from=build --chown=100:100 /tmp/haproxy/haproxy /
-COPY --from=build --chown=100:100 /lib/ld-musl-x86_64.so.1 /lib/
-COPY --from=build --chown=100:100 /tmp/group \
-                                  /tmp/passwd \
-                                  /etc/
+COPY --from=build --chown=100:100 /rootfs /
 
 USER 100:100
 STOPSIGNAL SIGUSR1
