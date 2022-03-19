@@ -13,8 +13,7 @@ RUN [ "$(sha256sum /tmp/haproxy.tar.gz | awk '{print $1}')" = "$CHECKSUM" ] && \
       make \
         -j 4 \
         TARGET="linux-musl" \
-        USE_OPENSSL="1" \
-        EXTRA_OBJS="contrib/prometheus-exporter/service-prometheus.o"
+        USE_OPENSSL="1"
 
 RUN mkdir -p /rootfs/bin && \
       cp /tmp/haproxy-$VERSION/haproxy /rootfs/bin/ && \
