@@ -1,8 +1,8 @@
 FROM alpine:3 AS build
 
-ARG VERSION="2.4.18"
+ARG VERSION="2.4.19"
 ARG VERSION_SHORT="2.4"
-ARG CHECKSUM="d7e46b56ac789d4fcf3ca209a109871e67ce4efca20a6537052f542f2af9616c"
+ARG CHECKSUM="99bd348a2b0ec58ce99510c4b6a2316e1f88137e59c4d8e0f39a2ecb3415a682"
 
 ADD https://www.haproxy.org/download/$VERSION_SHORT/src/haproxy-$VERSION.tar.gz /tmp/haproxy.tar.gz
 
