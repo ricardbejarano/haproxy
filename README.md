@@ -20,13 +20,13 @@
 
 Available on Docker Hub as [`docker.io/ricardbejarano/haproxy`](https://hub.docker.com/r/ricardbejarano/haproxy):
 
-- [`3.0.5`, `latest` *(Dockerfile)*](Dockerfile)
+- [`3.0.6`, `latest` *(Dockerfile)*](Dockerfile)
 
 ### RedHat Quay
 
 Available on RedHat Quay as [`quay.io/ricardbejarano/haproxy`](https://quay.io/repository/ricardbejarano/haproxy):
 
-- [`3.0.5`, `latest` *(Dockerfile)*](Dockerfile)
+- [`3.0.6`, `latest` *(Dockerfile)*](Dockerfile)
 
 
 ## Configuration
