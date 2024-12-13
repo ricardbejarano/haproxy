@@ -24,9 +24,10 @@ RUN mkdir -p /rootfs/bin && \
     mkdir -p /rootfs/etc/ssl/certs && \
       cp /etc/ssl/certs/ca-certificates.crt /rootfs/etc/ssl/certs/ && \
     mkdir -p /rootfs/lib && \
-      cp /lib/libssl.so.3 /rootfs/lib/ && \
-      cp /lib/libcrypto.so.3 /rootfs/lib/ && \
-      cp /lib/ld-musl-*.so.1 /rootfs/lib/
+      cp /lib/ld-musl-*.so.1 /rootfs/lib/ && \
+    mkdir -p /rootfs/usr/lib && \
+      cp /usr/lib/libssl.so.3 /rootfs/usr/lib/ && \
+      cp /usr/lib/libcrypto.so.3 /rootfs/usr/lib/
 
 
 FROM scratch
