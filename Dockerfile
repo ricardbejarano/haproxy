@@ -35,7 +35,7 @@ FROM build-base AS build
 RUN apk add \
       ca-certificates
 WORKDIR /tmp/haproxy
-ADD --checksum=sha256:ad630b6b0b73e1d118acce458fec1bf1e7d0e429530f2668ec582f4f8bb78e65 https://www.haproxy.org/download/3.2/src/haproxy-3.2.6.tar.gz /tmp/haproxy.tar.gz
+ADD --checksum=sha256:1f0ae9dfb0b319e2d5cb6e4cdf931a0877ad88e0090c46cf16faf008fbf54278 https://www.haproxy.org/download/3.2/src/haproxy-3.2.7.tar.gz /tmp/haproxy.tar.gz
 RUN tar -xzvf /tmp/haproxy.tar.gz --strip-components=1
 COPY --from=build-openssl /opt/openssl ./openssl
 COPY --from=build-pcre /opt/pcre ./pcre
