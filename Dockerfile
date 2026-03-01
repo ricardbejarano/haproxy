@@ -6,8 +6,8 @@ RUN apk add \
 
 FROM build-base AS build-openssl
 WORKDIR /tmp/openssl
-ARG OPENSSL_VERSION="3.5.1"
-ADD --checksum=sha256:529043b15cffa5f36077a4d0af83f3de399807181d607441d734196d889b641f https://github.com/openssl/openssl/releases/download/openssl-$OPENSSL_VERSION/openssl-$OPENSSL_VERSION.tar.gz /tmp/openssl.tar.gz
+ARG OPENSSL_VERSION="3.5.5"
+ADD --checksum=sha256:b28c91532a8b65a1f983b4c28b7488174e4a01008e29ce8e69bd789f28bc2a89 https://github.com/openssl/openssl/releases/download/openssl-$OPENSSL_VERSION/openssl-$OPENSSL_VERSION.tar.gz /tmp/openssl.tar.gz
 RUN tar -xzvf /tmp/openssl.tar.gz --strip-components=1 \
     && ./config --prefix=/opt/openssl --no-shared \
     && make -j"$(nproc)" \
@@ -15,8 +15,8 @@ RUN tar -xzvf /tmp/openssl.tar.gz --strip-components=1 \
 
 FROM build-base AS build-pcre
 WORKDIR /tmp/pcre
-ARG PCRE_VERSION="10.45"
-ADD --checksum=sha256:0e138387df7835d7403b8351e2226c1377da804e0737db0e071b48f07c9d12ee https://github.com/PCRE2Project/pcre2/releases/download/pcre2-$PCRE_VERSION/pcre2-$PCRE_VERSION.tar.gz /tmp/pcre.tar.gz
+ARG PCRE_VERSION="10.47"
+ADD --checksum=sha256:c08ae2388ef333e8403e670ad70c0a11f1eed021fd88308d7e02f596fcd9dc16 https://github.com/PCRE2Project/pcre2/releases/download/pcre2-$PCRE_VERSION/pcre2-$PCRE_VERSION.tar.gz /tmp/pcre.tar.gz
 RUN tar -xzvf /tmp/pcre.tar.gz --strip-components=1 \
     && ./configure --prefix=/opt/pcre --disable-shared --enable-static \
     && make -j"$(nproc)" \
@@ -35,7 +35,7 @@ FROM build-base AS build
 RUN apk add \
       ca-certificates
 WORKDIR /tmp/haproxy
-ADD --checksum=sha256:1f0ae9dfb0b319e2d5cb6e4cdf931a0877ad88e0090c46cf16faf008fbf54278 https://www.haproxy.org/download/3.2/src/haproxy-3.2.7.tar.gz /tmp/haproxy.tar.gz
+ADD --checksum=sha256:9cf45dadca6899908049d4c098d29ad866d89ba8a283d78a9c10890e157f6185 https://www.haproxy.org/download/3.2/src/haproxy-3.2.13.tar.gz /tmp/haproxy.tar.gz
 RUN tar -xzvf /tmp/haproxy.tar.gz --strip-components=1
 COPY --from=build-openssl /opt/openssl ./openssl
 COPY --from=build-pcre /opt/pcre ./pcre
