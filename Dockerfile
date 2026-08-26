@@ -6,8 +6,8 @@ RUN apk add \
 
 FROM build-base AS build-openssl
 WORKDIR /tmp/openssl
-ARG OPENSSL_VERSION="3.6.3"
-ADD --checksum=sha256:243a86649cf6f23eeb6a2ff2456e09e5d77dd9018a54d3d96b0c6bdd6ba6c7f1 https://github.com/openssl/openssl/releases/download/openssl-$OPENSSL_VERSION/openssl-$OPENSSL_VERSION.tar.gz /tmp/openssl.tar.gz
+ARG OPENSSL_VERSION="4.0.2"
+ADD --checksum=sha256:736b467530f916737b7031310ccb21d8218c6229e61e8e160cd1d3458cd543a8 https://github.com/openssl/openssl/releases/download/openssl-$OPENSSL_VERSION/openssl-$OPENSSL_VERSION.tar.gz /tmp/openssl.tar.gz
 RUN tar -xzvf /tmp/openssl.tar.gz --strip-components=1 \
     && ./config --prefix=/opt/openssl --no-shared \
     && make -j"$(nproc)" \
