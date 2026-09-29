@@ -15,8 +15,8 @@ RUN tar -xzvf /tmp/openssl.tar.gz --strip-components=1 \
 
 FROM build-base AS build-pcre
 WORKDIR /tmp/pcre
-ARG PCRE_VERSION="10.48"
-ADD --checksum=sha256:ebcc25aadf2a51fa1fefa9b8bc9e7a79b3dae86870a0f1152a22e42befd46888 https://github.com/PCRE2Project/pcre2/releases/download/pcre2-$PCRE_VERSION/pcre2-$PCRE_VERSION.tar.gz /tmp/pcre.tar.gz
+ARG PCRE_VERSION="10.49"
+ADD --checksum=sha256:929f0b20e62879252a15886b06c89f1edef61a363cbd5826fb041080a5e557ae https://github.com/PCRE2Project/pcre2/releases/download/pcre2-$PCRE_VERSION/pcre2-$PCRE_VERSION.tar.gz /tmp/pcre.tar.gz
 RUN tar -xzvf /tmp/pcre.tar.gz --strip-components=1 \
     && ./configure --prefix=/opt/pcre --disable-shared --enable-static \
     && make -j"$(nproc)" \
@@ -35,7 +35,7 @@ FROM build-base AS build
 RUN apk add \
       ca-certificates
 WORKDIR /tmp/haproxy
-ADD --checksum=sha256:ec5095095bce7db2e0e6e971f616dded1bb505717e692ec6c3cc8dab6a31678a https://www.haproxy.org/download/3.4/src/haproxy-3.4.5.tar.gz /tmp/haproxy.tar.gz
+ADD --checksum=sha256:791e1815f8af6e8b850a227a9a0a190f3d3478c9e8d38a0f51c98b7f4bfe368b https://www.haproxy.org/download/3.4/src/haproxy-3.4.6.tar.gz /tmp/haproxy.tar.gz
 RUN tar -xzvf /tmp/haproxy.tar.gz --strip-components=1
 COPY --from=build-openssl /opt/openssl ./openssl
 COPY --from=build-pcre /opt/pcre ./pcre
